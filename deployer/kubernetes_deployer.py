@@ -304,6 +304,7 @@ def main(challenges: list[Challenge], build_images: bool, ignore_existing: bool 
             "spec": {
                 "type": "LoadBalancer",
                 "externalTrafficPolicy": "Local",
+                "sessionAffinity": "ClientIP",
                 "selector": {
                     "challenge": challenge.id
                 },
