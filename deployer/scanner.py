@@ -30,6 +30,7 @@ class ChallengeConfig:
         description: str,
         connection_info: str,
         protocol: str,
+        needs_net_caps: bool,
         flag: str,
         points: int,
         author: str,
@@ -44,6 +45,7 @@ class ChallengeConfig:
         self.description: str = description
         self.connection_info: str = connection_info
         self.protocol: str = protocol
+        self.needs_net_caps: bool = needs_net_caps
         self.flag: str = flag
         self.points: int = points
         self.author: str = author
@@ -62,6 +64,7 @@ class ChallengeConfig:
                 description=config["description"] if "description" in config and config["description"] else "",
                 connection_info=config["connection_info"] if "connection_info" in config and config["connection_info"] else "",
                 protocol=config["protocol"] if "protocol" in config and config["protocol"] else "TCP",
+                needs_net_caps=config["needs_net_caps"] if "needs_net_caps" in config and config["needs_net_caps"] else False,
                 flag=config["flag"],
                 points=config["points"],
                 author=config["author"] if "author" in config and config["author"] else "unitn",

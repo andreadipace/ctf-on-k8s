@@ -13,7 +13,7 @@ import sys
 import os
 
 # Configure the Kubernetes client
-config.load_kube_config()
+config.load_kube_config("./kubeconfig")
 core_v1 = client.CoreV1Api()
 apps_v1 = client.AppsV1Api()
 autoscaling_v1 = client.AutoscalingV1Api()
@@ -217,6 +217,13 @@ def main(challenges: list[Challenge], build_images: bool, ignore_existing: bool 
                 "containerPort": DEFAULT_INTERNAL_PORT
             }],
         }]
+
+        if challenge.config.needs_net_caps:
+            containers[0]["securityContext"] = {
+                "capabilities": {
+                    "add": ["NET_ADMIN", "NET_RAW"]
+                }
+            }
 
         # Create the deployment
         deployment =         {
